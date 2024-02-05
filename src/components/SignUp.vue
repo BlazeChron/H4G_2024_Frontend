@@ -1,31 +1,33 @@
 <template>
-  <form @submit.prevent="submitSignIn">
+  <form @submit.prevent="submitSignUp">
     <label>Username</label>
     <input />
-    <button>Submit</button>
+    <button type="submit">Submit</button>
   </form>
 </template>
 
 <script>
   export default {
     methods: {
-      submitSignIn() {
+      submitSignUp() {
         console.log("submitbutton");
-        let baseUrl = 'https://localhost:3000/signup';
-         fetch(baseUrl, 
+        let baseUrl = 'http://localhost:3000/user/signin';
+        fetch(baseUrl, 
             {
              method: "POST",
              mode: "cors",
-             body: {
+             body: JSON.stringify({
                  username: 'bobo',
                  email: 'bobo@bobomail.com',
                  password: 'password',
-               },
+               }),
              headers: {
                "Content-Type": "application/json",
                },
              }
-             );
+             ).catch(error => {
+                 console.error('Panic at the disco:', error);
+                   });
       },
     }
   }
