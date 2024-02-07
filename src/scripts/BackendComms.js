@@ -15,8 +15,25 @@ const userSignUp = (username, email, password) => {
       }),
     }
   ).catch(error => {
-                 console.error('Panic at the disco:', error);
+                 console.error(error);
                    });
 }
 
-export {userSignUp}
+const userSignIn = (username, email, password) => {
+  fetch(baseURL + "/user/signin",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+          username: username,
+          email: email,
+          password: password, 
+      }),
+    }
+  ).catch(error => {
+                 console.error(error);
+                   });
+}
+export {userSignUp, userSignIn}
