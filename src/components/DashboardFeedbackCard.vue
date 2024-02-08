@@ -1,5 +1,6 @@
 <template>
   <div>
+    <router-link to="/">I am DashboardFeedback</router-link>
   </div>
 </template>
 

@@ -25,6 +25,16 @@ const routes = [
     name: '/signin',
     component: () => import('../views/SignIn.vue')
   },
+  {
+    path: '/profile',
+    name: '/profile',
+    component: () => import('../views/ProfilePage.vue')
+  },
+  {
+    path: '/dashboard',
+    name: '/dashboard',
+    component: () => import('../views/DashboardPage.vue')
+  },
 ]
 
 const router = createRouter({
