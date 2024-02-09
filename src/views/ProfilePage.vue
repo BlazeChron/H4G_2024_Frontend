@@ -19,7 +19,7 @@
   
         <li>
         <label :for="account-type">Account Type</label>
-        <select id="account-type">
+        <select id="account-type" v-model="accountType">
           <option>Volunteer</option>
           <option>NPO</option>
         </select>
@@ -49,15 +49,24 @@
 </template>
 
 <script>
+  import { userUpdateProfile } from "../scripts/BackendComms"
   export default {
     components: {
     },
     data() {
       return {
+        username: "",
+        email: "",
+        password: "",
+        accountType: "",
+        name: "",
+        phone: "",
+        description: "",
       };
     },
     methods: {
       submitUpdateRequest(){
+        userUpdateProfile(this.username, this.email, this.password, this.accountType, this.name, this.phone, this.description); 
       },
     }
   }
