@@ -24,6 +24,11 @@ const handleResponse = (response) => {
   return responseJSON;
 }
 
+//authentication
+const isNPO = () => {
+  const role = Cookies.get("role");
+  return role === "NPO";
+}
 
 const userSignUp = (username, email, password) => {
   const body = {
@@ -53,6 +58,7 @@ const userSignIn = (username, email, password) => {
         .then((response) => {
               console.log(response.token);
               Cookies.set('jwtToken', response.token, { expires: 1 }); // Set the cookie to expire in 1 day 
+              verifyJWT();
         })
         .catch(error => {console.error(error);});
 }
@@ -85,10 +91,31 @@ const verifyJWT = () => {
               }
         })
         .then((response) => {
+              Cookies.set('role', response.message.role, { expires: 1 });     //setting role as cookie when verifying jwt 
               console.log(response.token);
         })
         .catch(error => {console.error(error);});
 
 return;
 }
-export {userSignUp, userSignIn, verifyJWT, userUpdateProfile }
+
+
+//event related queries
+const createEvent = (event_name, description, start_time, end_time) => {
+  const body = {
+    event_name: event_name,
+    description: description,
+    start_time: start_time,
+    end_time: end_time,
+  }
+
+  fetch(baseRequest("/event/create", "POST", body, true))
+        .then((response) => {
+              if (response.ok) {
+                return handleResponse(response);
+              }
+        })
+        .catch(error => {console.error(error);});
+}
+
+export { isNPO, userSignUp, userSignIn, verifyJWT, userUpdateProfile, createEvent }

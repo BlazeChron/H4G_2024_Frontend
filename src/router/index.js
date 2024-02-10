@@ -35,6 +35,12 @@ const routes = [
     name: '/dashboard',
     component: () => import('../views/DashboardPage.vue')
   },
+  {
+    path: '/dashboardEvent',
+    name: '/dashboardEvent',
+    component: () => import('../views/DashboardEventPage.vue')
+  },
+
 ]
 
 const router = createRouter({
