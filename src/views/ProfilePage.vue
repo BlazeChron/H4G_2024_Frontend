@@ -1,5 +1,6 @@
 <template>
   <div class="grid-container">
+    <h3>Update Profile</h3>
     <form @submit.prevent="submitUpdateRequest">
       <ul>
         <li>
@@ -71,3 +72,9 @@
     }
   }
 </script>
+
+<style>
+  ul {
+    list-style: none;
+  }
+</style>

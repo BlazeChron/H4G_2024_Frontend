@@ -6,16 +6,18 @@ const baseRequest = (url, method, body, includeJWT) => {
   
   const storedToken = includeJWT ? Cookies.get('jwtToken') : ""; 
 
-  const request = new Request(baseURL + url, {
+  const requestBody = {
     method: method,
     headers: {
       "Content-Type": "application/json",
       'Authorization': `Bearer ${storedToken}`
     },
-    body: JSON.stringify(body),
+  };
+  if (body != null) {
+    requestBody.body = JSON.stringify(body);
   }
-  );
 
+  const request = new Request(baseURL + url, requestBody);
   return request;
 }
 
@@ -118,4 +120,17 @@ const createEvent = (event_name, description, start_time, end_time) => {
         .catch(error => {console.error(error);});
 }
 
-export { isNPO, userSignUp, userSignIn, verifyJWT, userUpdateProfile, createEvent }
+const queryEvent = (id) => {
+  return fetch(baseRequest(`/event/${id}`, "GET", null, false))
+        .then((response) => {
+              if (response.ok) {
+                return response.json();
+              }
+        })
+        .then((response) => {
+          return response.data;
+        })
+        .catch(error => {console.error(error);});
+}
+
+export { isNPO, userSignUp, userSignIn, verifyJWT, userUpdateProfile, createEvent, queryEvent }

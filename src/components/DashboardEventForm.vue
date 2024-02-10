@@ -1,6 +1,7 @@
 <template>
   <div>
     <form @submit.prevent="submitCreateEvent">
+      <h3>Event Creation Form</h3>
       <ul>
         <li>
           <label :for="event-name-field">Event Name</label>
