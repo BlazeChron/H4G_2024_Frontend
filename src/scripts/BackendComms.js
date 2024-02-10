@@ -40,6 +40,7 @@ const userSignUp = (username, email, password) => {
   }
 
   fetch(baseRequest("/user/signup", "POST", body, false))
+        .then(window.alert("Successful signup"))
         .catch(error => {console.error(error);});
 }
 
@@ -61,6 +62,11 @@ const userSignIn = (username, email, password) => {
               console.log(response.token);
               Cookies.set('jwtToken', response.token, { expires: 1 }); // Set the cookie to expire in 1 day 
               verifyJWT();
+              if (Cookies.get("name") === "null") {
+                window.alert("Logged in. Please update your name");
+              } else {
+                window.alert("Logged in as " + Cookies.get("name"));
+              }
         })
         .catch(error => {console.error(error);});
 }
@@ -94,7 +100,7 @@ const verifyJWT = () => {
         })
         .then((response) => {
               Cookies.set('role', response.message.role, { expires: 1 });     //setting role as cookie when verifying jwt 
-              console.log(response.token);
+              Cookies.set('name', response.message.name, { expires: 1 });     //setting role as cookie when verifying jwt 
         })
         .catch(error => {console.error(error);});
 

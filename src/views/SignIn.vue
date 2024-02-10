@@ -29,7 +29,7 @@
       submitSignIn() {
         //not sure if should verify here or BackEndComms.js
         if (this.username === "" || this.email === "" || this.password === "") {
-          console.log("field cannot be empty")
+          window.alert("field cannot be empty");
           return;
         }
         userSignIn(this.username, this.email, this.password);
