@@ -12,12 +12,11 @@
 
       <button type="submit">Submit</button>
     </form>
-    <button @click="verifyJWTButton">Check jwt</button>
   </div>
 </template>
 
 <script>
-  import { userSignIn, verifyJWT } from "../scripts/BackendComms"
+  import { userSignIn } from "../scripts/BackendComms"
   export default {
     data() {
       return {
@@ -34,10 +33,6 @@
           return;
         }
         userSignIn(this.username, this.email, this.password);
-      },
-
-      verifyJWTButton() {
-        verifyJWT();
       },
     }
   }
